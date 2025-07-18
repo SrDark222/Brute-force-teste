@@ -1,29 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Login Secreto</title>
-  <style>
-    body { background: #000; color: #fff; font-family: sans-serif; text-align: center; margin-top: 10%; }
-    input { margin: 10px; padding: 10px; border: none; border-radius: 5px; }
-    button { padding: 10px 20px; background: red; border: none; border-radius: 5px; color: white; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login - Tropa do Egito</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  body {
+    margin: 0; 
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background: linear-gradient(135deg, #1e1e2f, #121217);
+    font-family: 'Poppins', sans-serif;
+    color: #eee;
+  }
+  .container {
+    background: #222233cc;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 0 30px #ff6f61;
+    width: 320px;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 25px;
+    font-weight: 700;
+    color: #ff6f61;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #333344;
+    color: #eee;
+    transition: background 0.3s ease;
+  }
+  input[type="text"]:focus, input[type="password"]:focus {
+    background: #ff6f61;
+    color: #fff;
+    outline: none;
+  }
+  input[type="submit"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #ff6f61;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  input[type="submit"]:hover {
+    background: #ff3b2f;
+  }
+  .message {
+    margin-top: 20px;
+    font-weight: 700;
+  }
+  .success {
+    color: #4caf50;
+  }
+  .error {
+    color: #ff3b2f;
+  }
+</style>
 </head>
 <body>
-  <h2>Login 🔒</h2>
-  <input id="user" type="text" placeholder="Usuário"><br>
-  <input id="pass" type="password" placeholder="Senha"><br>
-  <button onclick="check()">Entrar</button>
+  <div class="container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <input type="text" id="user" name="user" placeholder="Usuário" required autocomplete="off" />
+      <input type="password" id="pass" name="pass" placeholder="Senha" required autocomplete="off" />
+      <input type="submit" value="Entrar" />
+    </form>
+    <div class="message" id="msg"></div>
+  </div>
 
   <script>
-    function check() {
-      const u = document.getElementById("user").value;
-      const p = document.getElementById("pass").value;
-      if (u === "admin" && p === "rei") {
-        window.location.href = "https://youtube.com";
+    const form = document.getElementById('loginForm');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const user = form.user.value;
+      const pass = form.pass.value;
+
+      if(user === 'admin' && pass === '123456789') {
+        msg.textContent = 'Login Sucesso';
+        msg.className = 'message success';
+        setTimeout(() => {
+          window.location.href = 'https://youtube.com';
+        }, 1500);
       } else {
-        alert("Acesso negado 🧱");
+        msg.textContent = 'Invalid login';
+        msg.className = 'message error';
       }
-    }
+    });
   </script>
 </body>
 </html>

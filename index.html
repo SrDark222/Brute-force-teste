@@ -5,92 +5,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Login Dark AMOLED</title>
 <style>
-  /* Dark AMOLED style */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
   body {
-    margin:0; padding:0;
-    background: #000;
-    color: #eee;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
+    margin: 0; padding: 0; background: #000000;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    display: flex; justify-content: center; align-items: center;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
   }
-  .login-box {
-    background: #121212;
-    padding: 40px 30px;
+  .login-container {
+    background: #111111cc;
+    padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 0 20px #0ff;
+    box-shadow: 0 0 15px #00fff7aa;
     width: 320px;
+  }
+  h2 {
     text-align: center;
+    margin-bottom: 1.5rem;
+    color: #00fff7;
   }
-  h1 {
-    margin-bottom: 24px;
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 700;
     color: #0ff;
-    letter-spacing: 2px;
   }
-  input[type=text], input[type=password] {
+  input[type="text"], input[type="password"] {
     width: 100%;
-    padding: 12px 15px;
-    margin: 10px 0 20px 0;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     background: #222;
-    color: #eee;
-    font-size: 16px;
+    color: #0ff;
+    font-size: 1rem;
   }
-  input[type=text]:focus, input[type=password]:focus {
-    outline: none;
-    box-shadow: 0 0 8px #0ff;
-  }
-  button {
+  input[type="submit"] {
+    margin-top: 1.5rem;
     width: 100%;
-    padding: 12px;
+    padding: 0.7rem;
+    background: #00fff7;
     border: none;
     border-radius: 8px;
-    background: #0ff;
     color: #000;
-    font-weight: bold;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  button:hover {
-    background: #00cccc;
+  input[type="submit"]:hover {
+    background: #00ccc3;
   }
   .error {
-    color: #f55;
-    margin-bottom: 12px;
-    display: none;
+    margin-top: 1rem;
+    color: #ff3c3c;
+    text-align: center;
+    font-weight: 700;
   }
 </style>
 </head>
 <body>
-  <div class="login-box">
-    <h1>Login</h1>
-    <div id="error" class="error">Usuário ou senha inválidos</div>
-    <input type="text" id="user" placeholder="Usuário" autocomplete="off" />
-    <input type="password" id="pass" placeholder="Senha" autocomplete="off" />
-    <button onclick="login()">Entrar</button>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form method="POST" action="">
+      <label for="user">Usuário</label>
+      <input type="text" id="user" name="user" required autofocus />
+      
+      <label for="pass">Senha</label>
+      <input type="password" id="pass" name="pass" required />
+      
+      <input type="submit" value="Entrar" />
+    </form>
+    <div class="error" id="error"></div>
   </div>
 
 <script>
-  function login(){
-    const user = document.getElementById('user').value.trim();
-    const pass = document.getElementById('pass').value.trim();
+  const form = document.querySelector('form');
+  const errorDiv = document.getElementById('error');
 
-    // Só aceita admin / foda123, qualquer outra senha ou usuário da erro
-    if(user === 'admin' && pass === 'foda123'){
-      // Limpa erro, redireciona pra YouTube no sucesso
-      document.getElementById('error').style.display = 'none';
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const user = form.user.value;
+    const pass = form.pass.value;
+
+    // Usuário e senha corretos (modifica aqui se quiser)
+    if(user === 'admin' && pass === 'rei123') {
       window.location.href = 'https://www.youtube.com/';
     } else {
-      // Mostra erro, mantém a página, pro Hydra identificar que não foi sucesso
-      const errorBox = document.getElementById('error');
-      errorBox.style.display = 'block';
-      errorBox.textContent = 'Usuário ou senha inválidos';
+      errorDiv.textContent = 'Login inválido, tenta de novo.';
     }
-  }
+  });
 </script>
 </body>
 </html>

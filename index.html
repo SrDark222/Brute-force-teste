@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login 🔐</title>
-  <style>
-    body { background: #111; color: #fff; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; }
-    form { background: #222; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px red; }
-    input { display: block; margin: 10px 0; padding: 8px; width: 100%; background: #333; border: none; color: white; }
-    button { background: red; border: none; padding: 10px; cursor: pointer; color: white; width: 100%; }
-  </style>
+  <title>Login Cruaço</title>
 </head>
 <body>
-  <form action="/api/login" method="POST">
-    <h3>Login Clássico</h3>
-    <input name="username" placeholder="Usuário" required>
-    <input name="password" type="password" placeholder="Senha" required>
+  <h2>Login Bruto</h2>
+  <form id="loginForm">
+    <label>Usuário:</label><br>
+    <input type="text" id="user"><br><br>
+
+    <label>Senha:</label><br>
+    <input type="password" id="pass"><br><br>
+
     <button type="submit">Entrar</button>
   </form>
+
+  <div id="resposta" style="margin-top:20px; color:red;"></div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var u = document.getElementById("user").value;
+      var p = document.getElementById("pass").value;
+
+      if (!u || !p) {
+        document.getElementById("resposta").innerText = "Preenche essa porra direito!";
+        return;
+      }
+
+      if (u === "admin" && p === "1234") {
+        document.getElementById("resposta").innerText = "Login aprovado. Vai patrão!";
+      } else {
+        document.getElementById("resposta").innerText = "Login errado. Sai fora!";
+      }
+    });
+  </script>
 </body>
 </html>
